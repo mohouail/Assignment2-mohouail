@@ -1,0 +1,8 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja -S /Users/Mohamed/Desktop/Fall2024-Assignment-2 -B /Users/Mohamed/Desktop/Fall2024-Assignment-2/cmake-build-debug
+-- Found PythonInterp: /opt/homebrew/bin/python3.12 (found version "3.12.3") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Configuring done (0.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/Mohamed/Desktop/Fall2024-Assignment-2/cmake-build-debug

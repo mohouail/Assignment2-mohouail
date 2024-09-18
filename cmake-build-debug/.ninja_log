@@ -1,0 +1,26 @@
+# ninja log v5
+0	409	1725996327438156602	CMakeFiles/Fall2024_Assignment_2.dir/main.cpp.o	2176bad899dddcf0
+411	500	1725996327533642996	Fall2024_Assignment_2	81ea4c3a0a7df5b5
+1	494	1726669512939791476	Code_lib/CMakeFiles/Code_lib.dir/DEQ.cpp.o	648457bfaa7baac4
+2	496	1726669512940469271	Code_lib/CMakeFiles/Code_lib.dir/Plane.cpp.o	8f6e2f1b565a7de
+0	498	1726669512944536789	CMakeFiles/Code_lib_run.dir/main.cpp.o	76cfd7e4597fd87b
+2	512	1726669512958453687	Code_lib/CMakeFiles/Code_lib.dir/Simulation.cpp.o	ff13577cfe56b33d
+512	535	1726669512985370000	Code_lib/libCode_lib.a	81f758a96afbcf4d
+535	652	1726669513099320877	Code_lib_run	2ccd7afc54681b1b
+3	565	1726669517838945939	Google_tests/lib/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o	455bc5aa5a60f22f
+2	619	1726669517892688269	Google_tests/CMakeFiles/Google_Tests_run.dir/TestPlane.cpp.o	c2612ce8056e863f
+2	619	1726669517893040271	Google_tests/CMakeFiles/Google_Tests_run.dir/TestDEQ.cpp.o	306c7c9989e14847
+2	620	1726669517894400652	Google_tests/CMakeFiles/Google_Tests_run.dir/TestSimulation.cpp.o	690e9dfaca11643d
+3	1244	1726669518516314681	Google_tests/lib/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o	7407527d18da3f09
+1244	1267	1726669518545533000	lib/libgtestd.a	2769899556e25f17
+1267	1287	1726669518564916000	lib/libgtest_maind.a	b1fac6679c1143de
+1287	1315	1726669518591517569	Google_tests/Google_Tests_run	f0db8f807c91baba
+2	470	1726670268689818546	Code_lib/CMakeFiles/Code_lib.dir/Simulation.cpp.o	ff13577cfe56b33d
+470	499	1726670268723012000	Code_lib/libCode_lib.a	81f758a96afbcf4d
+499	642	1726670268860868723	Google_tests/Google_Tests_run	f0db8f807c91baba
+3	452	1726670876108176663	Code_lib/CMakeFiles/Code_lib.dir/DEQ.cpp.o	648457bfaa7baac4
+3	463	1726670876111755243	Code_lib/CMakeFiles/Code_lib.dir/Plane.cpp.o	8f6e2f1b565a7de
+464	496	1726670876157240000	Code_lib/libCode_lib.a	81f758a96afbcf4d
+496	627	1726670876282529666	Google_tests/Google_Tests_run	f0db8f807c91baba
+3	508	1726672884368184252	CMakeFiles/Code_lib_run.dir/main.cpp.o	76cfd7e4597fd87b
+508	623	1726672884485335698	Code_lib_run	2ccd7afc54681b1b
