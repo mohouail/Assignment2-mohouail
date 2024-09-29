@@ -18,6 +18,7 @@ Simulation::Simulation(int Tmax, int Ts, int DeltaT)
     // TODO: Initialize the random number generator using `srand`.
     // This will ensure random behavior for plane arrival times and priorities.
     // Tip: Use `srand((unsigned) time(0));` to initialize the RNG based on the system clock.
+    srand((unsigned) time(0));
 }
 
 // Student Task: Implement the run function
@@ -35,19 +36,35 @@ Simulation::Simulation(int Tmax, int Ts, int DeltaT)
 //
 // Task: Implement the simulation loop that processes plane arrivals and landings.
 void Simulation::run() {
-    // Student Task: Implement the run function
-    // TODO: Initialize a variable `currentTime` to track the current time of the simulation.
-    // TODO: Use `generateNextArrivalTime()` to determine when the next plane arrives.
+      int currentTime = 0;  // Track current simulation time
+    int nextArrivalTime = generateNextArrivalTime();  // Generate time for next plane arrival
+    int lastLandingTime = 0;  // Track last time a plane landed
 
-    // TODO: Write a loop that runs until `currentTime` reaches `Tmax` (total simulation time).
-    // Inside the loop:
-    // 1. Check if the current time equals the next plane's arrival time.
-    //    If so, generate a plane with a random priority (using `generateRandomPriority()`)
-    //    and add it to the queue with `enqueuePlane()`.
-    // 2. Every `Ts` minutes (landing interval), check if a plane can land using `processLanding()`.
-    // 3. Increment the current time by 1 minute for each loop iteration.
+    // Main simulation loop until the total simulation time Tmax is reached
+    while (currentTime < Tmax) {
+        
+        // Check if a new plane arrives at the current time
+        if (currentTime == nextArrivalTime) {
+            // Generate a plane with a random priority
+            Plane newPlane(currentTime, generateRandomPriority());
+            enqueuePlane(newPlane);  // Add the new plane to the queue
+            
+            // Generate the time for the next plane arrival
+            nextArrivalTime = currentTime + generateNextArrivalTime();
+        }
 
-    // TODO: After the loop ends, call `printAverageWaitTime()` to display the average wait time.
+        // Process landing if it's time to land a plane
+        if ((currentTime - lastLandingTime) >= Ts && !queue.DEQisEmpty()) {
+            processLanding(currentTime);  // Handle the landing process
+            lastLandingTime = currentTime;  // Update the time of last landing
+        }
+
+        // Move the simulation time forward by 1 minute
+        currentTime++;
+    }
+
+    // At the end of the simulation, print the average wait time for all planes
+    printAverageWaitTime();
 }
 
 // Student Task: Implement the enqueuePlane function
@@ -65,7 +82,12 @@ void Simulation::run() {
 void Simulation::enqueuePlane(const Plane& plane) {
     // Student Task: Implement the enqueuePlane function
     // TODO: If the queue is empty, add the plane to the front.
-
+    if(queue.DEQisEmpty()){
+        queue.Add_Front(plane);
+    }
+    else{
+        queue.Add_priority(plane, plane.priority);
+    }
     // TODO: If the queue is not empty, traverse through the queue and find the correct spot for
     // the plane based on its priority (higher priorities come first).
     // 1. Use a temporary queue to store planes while finding the right spot.
@@ -89,16 +111,18 @@ void Simulation::processLanding(int currentTime) {
     // Student Task: Implement the processLanding function
     // TODO: Remove the plane at the front of the queue (using `Remove_Front()`).
     // This will be the plane that has waited the longest.
-
+    int Tarr = queue.View_Front().arrivalTime;
+    queue.Remove_Front();
+    
     // TODO: Calculate the plane's wait time by subtracting the plane's `arrivalTime` from `currentTime`.
-
+    int Twait = currentTime - Tarr; 
     // TODO: Store the calculated wait time in the `waitTimes` vector.
-
-    // TODO: Print a message that the plane has landed and how long it waited in the queue.
+    waitTimes.push_back(Twait);
+        // TODO: Print a message that the plane has landed and how long it waited in the queue.
+        cout<<"The plane has landed, it has waited "<<Twait<<" mins at the queue.";
 }
 
 // Student Task: Implement the printAverageWaitTime function
-// Function: printAverageWaitTime() const
 // This function is responsible for calculating and printing the average wait time of all planes that have landed.
 //
 // Key steps:
@@ -110,7 +134,17 @@ void Simulation::processLanding(int currentTime) {
 void Simulation::printAverageWaitTime() const {
     // Student Task: Implement the printAverageWaitTime function
     // TODO: If no planes have landed, print "No planes landed."
-
+    if (waitTimes.empty()){
+        cout<<"No planes landed";
+    }else{
+        int tav=0, inc=0;
+        for(int time:waitTimes){
+            tav =+time;
+            inc++;
+        }
+        tav=tav/inc;
+        cout<<"The average time of wait per plane is: "<<tav;
+    }
     // TODO: If planes have landed, calculate the total wait time by summing the values in the `waitTimes` vector.
     // Divide the total wait time by the number of planes to get the average.
 

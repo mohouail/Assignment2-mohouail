@@ -23,6 +23,9 @@ template <typename T>
 DEQ<T>::~DEQ() {
     // Student Task: Implement the DEQ destructor
     // TODO: Use a loop to keep calling `Remove_Front()` until the DEQ is empty.
+    while(front != nullptr){
+        Remove_Front();
+    }
 }
 
 // Student Task: Implement the DEQisEmpty function
@@ -33,6 +36,7 @@ template <typename T>
 bool DEQ<T>::DEQisEmpty() const {
     // Student Task: Implement the DEQisEmpty function
     // TODO: Return true if `front` is `nullptr`, indicating an empty DEQ.
+    return front == nullptr;
 }
 
 // Student Task: Implement the Add_Front function
@@ -49,6 +53,15 @@ void DEQ<T>::Add_Front(const T& value) {
     // TODO: 2. If the DEQ is empty, set `front` and `rear` to the new node.
     // TODO: 3. If the DEQ is not empty, adjust the `front` pointer and link the new node to the old front node.
     // TODO: 4. Increment the `length` of the DEQ.
+    Node* newNode = new Node(value);
+    if(DEQisEmpty()){
+        front = rear = newNode;
+    }else{
+        Node* temp = front;
+        front = newNode;
+        newNode.next = temp;
+    }
+    length++;
 }
 
 // Student Task: Implement the Add_Rear function
@@ -65,6 +78,16 @@ void DEQ<T>::Add_Rear(const T& value) {
     // TODO: 2. If the DEQ is empty, set `front` and `rear` to the new node.
     // TODO: 3. If the DEQ is not empty, adjust the `rear` pointer and link the new node to the old rear node.
     // TODO: 4. Increment the `length` of the DEQ.
+    Node* newNode = new Node(value);
+    if(DEQisEmpty()){
+        front = rear = newNode;
+    }else{
+        Node* temp = rear;
+        rear = newNode;
+        newNode.prev = temp;
+
+    }
+    length++;
 }
 
 // Student Task: Implement the Remove_Front function
@@ -82,6 +105,32 @@ T DEQ<T>::Remove_Front() {
     // TODO: 3. Adjust the `front` pointer to point to the next node.
     // TODO: 4. If the DEQ only had one element, set `front` and `rear` to `nullptr`.
     // TODO: 5. Delete the old `front` node, decrement `length`, and return the stored value.
+    if(DEQisEmpty()){throw runtime_error}
+    else{
+        Node* temp = front;
+        front = front.next;
+        delete temp;
+        if(length == 1){
+            rear = front = nullptr;
+        }
+        length--;
+    }
+}
+
+template <typename T>
+void DEQ<T>::Add_priority(const T &value, int priority)
+{
+    if(queue.empty()){
+        Add_Front(value);
+    }else{
+        Node* cursor = front;
+        while(cursor->data.priority >= priority || cursor->next != nullptr ){
+            cursor = cursor->next;
+        }
+        Node* prevprev = cursor->prev;
+        value->prev = prevprev;
+        value.next = cursor;
+    }
 }
 
 // Student Task: Implement the Remove_Rear function
@@ -99,6 +148,17 @@ T DEQ<T>::Remove_Rear() {
     // TODO: 3. Adjust the `rear` pointer to point to the previous node.
     // TODO: 4. If the DEQ only had one element, set `front` and `rear` to `nullptr`.
     // TODO: 5. Delete the old `rear` node, decrement `length`, and return the stored value.
+    if(DEQisEmpty()){throw runtime_error}
+    else{
+        Node* temp = rear;
+        rear = rear.prev;
+        delete temp;
+        if(length == 1){
+            rear = front = nullptr;
+        }
+        length--;
+    }
+    
 }
 
 // Student Task: Implement the View_Front function
@@ -110,6 +170,9 @@ T DEQ<T>::View_Front() const {
     // Student Task: Implement the View_Front function
     // TODO: 1. If the DEQ is empty, throw an `out_of_range` exception.
     // TODO: 2. Return the data from the `front` node without removing it.
+    if(DEQisEmpty()){throw out_of_range}else{
+        return *front;
+    }
 }
 
 // Student Task: Implement the View_Rear function
@@ -121,6 +184,9 @@ T DEQ<T>::View_Rear() const {
     // Student Task: Implement the View_Rear function
     // TODO: 1. If the DEQ is empty, throw an `out_of_range` exception.
     // TODO: 2. Return the data from the `rear` node without removing it.
+    if(DEQisEmpty()){throw out_of_range}else{
+        return *rear;
+    }
 }
 
 // Student Task: Implement the DEQ_Length function
@@ -130,6 +196,7 @@ template <typename T>
 int DEQ<T>::DEQ_Length() const {
     // Student Task: Implement the DEQ_Length function
     // TODO: Return the `length` of the DEQ.
+    return length;
 }
 
 // Explicit template instantiation for int and Plane types
