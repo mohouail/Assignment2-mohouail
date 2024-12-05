@@ -11,7 +11,8 @@ project(ADS-Assignment2_full_version)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp
+        "Exam practice/examples.cpp")
 add_executable(Code_lib_run ${SOURCE_FILES})
 
 include_directories(Code_lib)
